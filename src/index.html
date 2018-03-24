@@ -2,12 +2,88 @@
 <html>
   <head>
     <meta charset="UTF-8">
+    <link rel="stylesheet" href="styles/main.css">
   </head>
 
   <body>
-    <main class="product-listing-wrapper">
-    </main>
+    <div class="wrapper">
+      <header></header>
+
+      <main class="product-listing-wrapper">
+      </main>
+      
+      <footer></footer>
+    </div>
+
+    <script type="text/template" id="listing-template">
+      <div class="listing__img">
+        <img alt="product picture">
+      </div>
+      <div class="listing__discript">
+        <p class="listing__title"></p>
+        <p class="listing__price"></p>
+      </div>
+      <div class="listing__controls">
+        <button class="listing__buy-btn">Заказать</button>
+        <button class="listing__add-btn">В корзину</button>
+      </div>
+    </script>
+
+    <script type="text/template" id="order-popup-template">
+      <form>
+        <div class="order-popup__close-btn">X</div>
+        <h3 class="order-popup__title"></h3>
+        <div class="order-popup__content">
+          <div class="order-popup__left-side">
+            <div class="order-popup__img">
+              <img alt="product picture">
+            </div>
+            <p class="order-popup__price"></p>
+          </div>
+          <div class="order-popup__right-side">
+            <label>
+              <p>Комментарий к заказу:</p>
+              <textarea name="order-coments"></textarea>
+            </label>
+          </div>
+        </div>
+        <div class="order-popup__bottom">
+          <label>
+            Ваш телефон*:
+            <input class="order-popup__phone-field" type="tel" required pattern="\+{0,}[0-9\-\(\)\s]{5,}" placeholder="+7__________">
+          </label>
+            <br>
+            <input class="order-popup__send-btn" type="submit" value="Отправить">
+        </div>
+      </form>
+    </script>
+
+    <script type="text/template" id="cart-poput-template">
+      <div class="cart-popup__arrow"> </div>
+      <div class="cart-popup__wrapper">
+        <h3 class="cart-popup__header">
+          Вы добавили в корзину:
+        </h3>
+        <ul class="cart-popup__list">
+          <li class="cart-popup__empty-item">Корзина пуста
+        </ul>
+        <button class="cart-popup__to-cart-btn">Перейти в корзину</button>
+        <hr>
+      </div>
+    </script>
+
+    <script type="text/template" id="cart-poput-item-template">
+        <div class="cart-popup__img">
+          <img alt="product picture">
+        </div>
+        <div class="cart-popup__content">
+          <p class="cart-popup__title"></p>
+          <p class="cart-popup__price"></p>
+        </div>
+        <div class="cart-popup__close-btn">X</div>
+    </script>
 
     <script src="api/products.js"></script>
+    <script src="scripts/main.js"></script>
   </body>
 </html>
