@@ -60,12 +60,13 @@ function CartPopup () {
       
       alert('Sending data: ' + sendingStr + '\n' + 'Cart will be cleared')
       
-      dataArray = []
-      elem.querySelectorAll('.cart-popup__item').forEach(function (item) { 
-        item.remove() 
-      })
-      elem.querySelector('.cart-popup__empty-item').style.display = 'block'
+      dataArray = [];
+      [].forEach.call(
+        elem.querySelectorAll('.cart-popup__item'),
+        function (item) { item.remove() }
+      )
 
+      elem.querySelector('.cart-popup__empty-item').style.display = 'block'
       return
     }
 
@@ -115,7 +116,7 @@ function CartPopup () {
     setTimeout(function () { item.style.background = '' }, 100)
     list.insertBefore(item, list.firstChild)
 
-    list.scrollTo(0, 0);
+    list.scrollTop = 0
     this.active()
   }
 
@@ -146,6 +147,7 @@ function OrderPopup (data) {
   elem.className = 'order-popup'
   elem.innerHTML = orderPopupTemplate
   document.body.appendChild(elem)
+  elem.querySelector('textarea').focus()
   
   let mask = document.createElement('div')
   mask.className = 'mask'
@@ -159,8 +161,6 @@ function OrderPopup (data) {
   setTimeout(function(){ elem.style.opacity = 1 }, 0)
 
   this.close = function () {
-    document.removeEventListener('scroll', lockScroll)
-
     elem.style.opacity = 0
     mask.style.opacity = 0
 
@@ -179,19 +179,14 @@ function OrderPopup (data) {
     self.close()
   })
 
-  function lockScroll (e) {
-    window.scrollTo(0, currentScroll);
-  }
-  document.addEventListener('scroll', lockScroll)
-
   elem.addEventListener('submit', function(e) {
     e.preventDefault()
-    alert(`Data sending:
-    id: ${data.id}
-    title: ${data.title}
-    price: ${data.price}
-    comment: ${elem.querySelector('textarea').value}
-    phone: ${elem.querySelector('.order-popup__phone-field').value}`)
+  
+    alert(
+      'Sending data: ' + data.id + ', ' + data.title + ', ' + data.price + '\n'
+      + elem.querySelector('textarea').value + ', ' + elem.querySelector('.order-popup__phone-field').value
+    )
+
     self.close()
   })
 }
@@ -214,15 +209,23 @@ function Listing (container, cart) {
     let target = e.target
 
     if (target.classList.contains('listing__buy-btn')) {
-      let itemData = data.find(function (elem) {
-        return elem.id == target.closest('.listing__item').dataset.id
+      let itemData
+      data.forEach(function (elem) {
+        if (elem.id == target.closest('.listing__item').dataset.id) {
+          itemData = elem
+          return
+        }
       })
       new OrderPopup(itemData)
     }
 
     if (target.classList.contains('listing__add-btn')) {
-      let itemData = data.find(function (elem) {
-        return elem.id == target.closest('.listing__item').dataset.id
+      let itemData
+      data.forEach(function (elem) {
+        if (elem.id == target.closest('.listing__item').dataset.id) {
+          itemData = elem
+          return
+        }
       })
       cart.addItem(itemData)
     }
@@ -256,3 +259,48 @@ function Listing (container, cart) {
     return item
   }
 }
+
+
+/**
+ * Closest() IE11 polyfill
+ */
+(function(ELEMENT) {
+  ELEMENT.matches = ELEMENT.matches || ELEMENT.mozMatchesSelector || ELEMENT.msMatchesSelector || ELEMENT.oMatchesSelector || ELEMENT.webkitMatchesSelector;
+  ELEMENT.closest = ELEMENT.closest || function closest(selector) {
+      if (!this) return null;
+      if (this.matches(selector)) return this;
+      if (!this.parentElement) {return null}
+      else return this.parentElement.closest(selector)
+    };
+}(Element.prototype));
+
+/**
+ * Remove() IE11 polyfill
+ */
+(function() {
+  var arr = [window.Element, window.CharacterData, window.DocumentType];
+  var args = [];
+
+  arr.forEach(function (item) {
+    if (item) {
+      args.push(item.prototype);
+    }
+  });
+
+  // from:https://github.com/jserz/js_piece/blob/master/DOM/ChildNode/remove()/remove().md
+  (function (arr) {
+    arr.forEach(function (item) {
+      if (item.hasOwnProperty('remove')) {
+        return;
+      }
+      Object.defineProperty(item, 'remove', {
+        configurable: true,
+        enumerable: true,
+        writable: true,
+        value: function remove() {
+          this.parentNode.removeChild(this);
+        }
+      });
+    });
+  })(args);
+})();
