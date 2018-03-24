@@ -7,12 +7,12 @@ listing.render(API.products)
 
 /**
  * Formate price 1000000 to 10 000 000 руб.
- * 
- * @param {number} price 
+ *
+ * @param {number} price
  * @returns {string}
  */
 function formatePrice (price) {
-  return price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, " ") + ' руб.'
+  return price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ' ') + ' руб.'
 }
 
 /**
@@ -20,12 +20,11 @@ function formatePrice (price) {
  * new CartPopup() - creating empty cart object (hidden)
  * this.active() - displaying cart element for 2.5 seconds
  * this.add() - adding new product to card and display it
- * 
+ *
  * @constructor
  */
 
 function CartPopup () {
-  let self = this
   let hideTimeout
   let dataArray = []
 
@@ -55,11 +54,11 @@ function CartPopup () {
       let sendingStr = '\n'
 
       for (let i = 0; i < dataArray.length; i++) {
-        sendingStr+= dataArray[i].id + ', ' + dataArray[i].title + ', ' + dataArray[i].price + '\n'
+        sendingStr += dataArray[i].id + ', ' + dataArray[i].title + ', ' + dataArray[i].price + '\n'
       }
-      
+
       alert('Sending data: ' + sendingStr + '\n' + 'Cart will be cleared')
-      
+
       dataArray = [];
       [].forEach.call(
         elem.querySelectorAll('.cart-popup__item'),
@@ -78,7 +77,6 @@ function CartPopup () {
       dataArray.forEach(function (elem, i) {
         if (elem.id == currentId) {
           dataArray.splice(i, 1)
-          return
         }
       })
 
@@ -87,8 +85,6 @@ function CartPopup () {
       if (list.children.length == 1) {
         elem.querySelector('.cart-popup__empty-item').style.display = 'block'
       }
-
-      return
     }
   })
 
@@ -100,7 +96,7 @@ function CartPopup () {
   }
 
   this.addItem = function (itemData) {
-    dataArray.push(itemData) 
+    dataArray.push(itemData)
 
     elem.querySelector('.cart-popup__empty-item').style.display = 'none'
     let item = document.createElement('li')
@@ -133,32 +129,31 @@ function CartPopup () {
  * Order popup class
  * new OrderPopup() - creating poput whith the passind data
  * this.close() - destroing element
- * 
+ *
  * @constructor
- * @param {Object} data 
+ * @param {Object} data
  */
 
 function OrderPopup (data) {
   let self = this
   let orderPopupTemplate = document.getElementById('order-popup-template').innerHTML
-  let currentScroll = window.pageYOffset
 
   let elem = document.createElement('div')
   elem.className = 'order-popup'
   elem.innerHTML = orderPopupTemplate
   document.body.appendChild(elem)
   elem.querySelector('textarea').focus()
-  
+
   let mask = document.createElement('div')
   mask.className = 'mask'
   document.body.appendChild(mask)
-  setTimeout(function() { mask.style.opacity = 0.7 }, 0)
+  setTimeout(function () { mask.style.opacity = 0.7 }, 0)
 
   elem.querySelector('.order-popup__title').innerHTML = data.title
   elem.querySelector('.order-popup__price').innerHTML = formatePrice(data.price)
   elem.querySelector('.order-popup__img img').src = data.img
 
-  setTimeout(function(){ elem.style.opacity = 1 }, 0)
+  setTimeout(function () { elem.style.opacity = 1 }, 0)
 
   this.close = function () {
     elem.style.opacity = 0
@@ -167,24 +162,24 @@ function OrderPopup (data) {
     elem.querySelector('form').reset()
     setTimeout(function () {
       elem.remove()
-      mask.remove() 
+      mask.remove()
     }, 250)
   }
 
-  elem.querySelector('.order-popup__close-btn').addEventListener('click', function(e) {
+  elem.querySelector('.order-popup__close-btn').addEventListener('click', function (e) {
     self.close()
   })
 
-  mask.addEventListener('click', function(e) {
+  mask.addEventListener('click', function (e) {
     self.close()
   })
 
-  elem.addEventListener('submit', function(e) {
+  elem.addEventListener('submit', function (e) {
     e.preventDefault()
-  
+
     alert(
-      'Sending data: ' + data.id + ', ' + data.title + ', ' + data.price + '\n'
-      + elem.querySelector('textarea').value + ', ' + elem.querySelector('.order-popup__phone-field').value
+      'Sending data: ' + data.id + ', ' + data.title + ', ' + data.price + '\n' +
+      elem.querySelector('textarea').value + ', ' + elem.querySelector('.order-popup__phone-field').value
     )
 
     self.close()
@@ -195,17 +190,17 @@ function OrderPopup (data) {
  * Product list class
  * new Listing() - binding object to parent HTMLElement and some CartPoput
  * render() - geting data array and rendering it. Recalling this allow to udate data
- * 
+ *
  * @constructor
- * @param {HTMLElement} container 
- * @param {CartPopup} cart 
+ * @param {HTMLElement} container
+ * @param {CartPopup} cart
  */
 
 function Listing (container, cart) {
   let itemTemplate = document.getElementById('listing-template').innerHTML
   let data
 
-  container.addEventListener('click', function(e) {
+  container.addEventListener('click', function (e) {
     let target = e.target
 
     if (target.classList.contains('listing__buy-btn')) {
@@ -213,7 +208,6 @@ function Listing (container, cart) {
       data.forEach(function (elem) {
         if (elem.id == target.closest('.listing__item').dataset.id) {
           itemData = elem
-          return
         }
       })
       new OrderPopup(itemData)
@@ -224,7 +218,6 @@ function Listing (container, cart) {
       data.forEach(function (elem) {
         if (elem.id == target.closest('.listing__item').dataset.id) {
           itemData = elem
-          return
         }
       })
       cart.addItem(itemData)
@@ -238,11 +231,11 @@ function Listing (container, cart) {
     let elem = document.createElement('ul')
     elem.className = 'listing__list'
 
-    data.forEach(function(itemData, i) {
+    data.forEach(function (itemData, i) {
       let item = createItem(itemData)
       elem.appendChild(item)
     })
-    
+
     container.appendChild(elem)
   }
 
@@ -260,30 +253,28 @@ function Listing (container, cart) {
   }
 }
 
-
 /**
  * Closest() IE11 polyfill
  */
-(function(ELEMENT) {
-  ELEMENT.matches = ELEMENT.matches || ELEMENT.mozMatchesSelector || ELEMENT.msMatchesSelector || ELEMENT.oMatchesSelector || ELEMENT.webkitMatchesSelector;
-  ELEMENT.closest = ELEMENT.closest || function closest(selector) {
-      if (!this) return null;
-      if (this.matches(selector)) return this;
-      if (!this.parentElement) {return null}
-      else return this.parentElement.closest(selector)
-    };
+(function (ELEMENT) {
+  ELEMENT.matches = ELEMENT.matches || ELEMENT.mozMatchesSelector || ELEMENT.msMatchesSelector || ELEMENT.oMatchesSelector || ELEMENT.webkitMatchesSelector
+  ELEMENT.closest = ELEMENT.closest || function closest (selector) {
+    if (!this) return null
+    if (this.matches(selector)) return this
+    if (!this.parentElement) { return null } else return this.parentElement.closest(selector)
+  }
 }(Element.prototype));
 
 /**
  * Remove() IE11 polyfill
  */
-(function() {
-  var arr = [window.Element, window.CharacterData, window.DocumentType];
-  var args = [];
+(function () {
+  var arr = [window.Element, window.CharacterData, window.DocumentType]
+  var args = []
 
   arr.forEach(function (item) {
     if (item) {
-      args.push(item.prototype);
+      args.push(item.prototype)
     }
   });
 
@@ -291,16 +282,16 @@ function Listing (container, cart) {
   (function (arr) {
     arr.forEach(function (item) {
       if (item.hasOwnProperty('remove')) {
-        return;
+        return
       }
       Object.defineProperty(item, 'remove', {
         configurable: true,
         enumerable: true,
         writable: true,
-        value: function remove() {
-          this.parentNode.removeChild(this);
+        value: function remove () {
+          this.parentNode.removeChild(this)
         }
-      });
-    });
-  })(args);
-})();
+      })
+    })
+  })(args)
+})()
