@@ -74,11 +74,12 @@ function CartPopup () {
       let currentItem = target.closest('.cart-popup__item')
       let currentId = currentItem.dataset.id
 
-      dataArray.forEach(function (elem, i) {
-        if (elem.id == currentId) {
+      for (let i = 0; i < dataArray.length; i++) {
+        if (dataArray[i].id == currentId) {
           dataArray.splice(i, 1)
+          break
         }
-      })
+      }
 
       currentItem.remove()
 
