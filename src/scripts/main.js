@@ -2,8 +2,8 @@
 
 // Star
 let cart = new CartPopup()
-let listing = new Listing(document.querySelector('.product-listing-wrapper'), cart)
-listing.render(API.products)
+let listing = new Listing(API.products, cart)
+document.querySelector('.product-listing-wrapper').appendChild(listing.getElement())
 
 /**
  * Formate price 1000000 to 10 000 000 руб.
@@ -196,16 +196,18 @@ function OrderPopup (data) {
  * @param {CartPopup} cart
  */
 
-function Listing (container, cart) {
-  let itemTemplate = document.getElementById('listing-template').innerHTML
-  let data
+function Listing (data, cart) {
+  let _itemTemplate = document.getElementById('listing-template').innerHTML
+  let _data = data
+  let _element = document.createElement('div')
+  _element.className = 'listing'
 
-  container.addEventListener('click', function (e) {
+  _element.addEventListener('click', function (e) {
     let target = e.target
 
     if (target.classList.contains('listing__buy-btn')) {
       let itemData
-      data.forEach(function (elem) {
+      _data.forEach(function (elem) {
         if (elem.id == target.closest('.listing__item').dataset.id) {
           itemData = elem
         }
@@ -215,7 +217,7 @@ function Listing (container, cart) {
 
     if (target.classList.contains('listing__add-btn')) {
       let itemData
-      data.forEach(function (elem) {
+      _data.forEach(function (elem) {
         if (elem.id == target.closest('.listing__item').dataset.id) {
           itemData = elem
         }
@@ -224,25 +226,39 @@ function Listing (container, cart) {
     }
   })
 
-  this.render = function (arr) {
-    data = arr
-    container.innerHTML = ''
+  this.getElement = function () {
+    render()
+    return _element
+  }
 
-    let elem = document.createElement('ul')
-    elem.className = 'listing__list'
+  this.setData = function (data) {
+    _data = data
+    render()
+  }
 
-    data.forEach(function (itemData, i) {
+  function render () {
+    if (!_data) {
+      console.error('Data is not defined')
+      return
+    }
+
+    _element.innerHTML = ''
+
+    let list = document.createElement('ul')
+    list.className = 'listing__list'
+
+    _data.forEach(function (itemData, i) {
       let item = createItem(itemData)
-      elem.appendChild(item)
+      list.appendChild(item)
     })
 
-    container.appendChild(elem)
+    _element.appendChild(list)
   }
 
   function createItem (itemData) {
     let item = document.createElement('li')
     item.className = 'listing__item'
-    item.innerHTML = itemTemplate
+    item.innerHTML = _itemTemplate
 
     item.querySelector('.listing__img img').src = itemData.img
     item.querySelector('.listing__title').innerHTML = itemData.title
