@@ -3,10 +3,16 @@
 /**
  * Использование всех модулей на одной странице
  */
+let cartPopup = new CartPopup(1700)
+document.body.appendChild(cartPopup.getElement())
+
+let orderPopup = new OrderPopup()
+document.body.appendChild(orderPopup.getElement())
+
 let listing = new Listing({
     data: API.products,
-    cartPopup: new CartPopup(1700),
-    orderPopup: new OrderPopup()
+    cartPopup: cartPopup,
+    orderPopup: orderPopup
   })
 document.querySelector('.product-listing-wrapper').appendChild(listing.getElement())
 
@@ -15,13 +21,13 @@ document.querySelector('.product-listing-wrapper').appendChild(listing.getElemen
  * Использование листинга отдельно
  * Листинг может принимать слледующие параметры:
  *
- *  orderPopup: объет с реализованными методами getElement(): Element и show(data: {}): void
+ *  orderPopup: объет с реализованным методом show(data: {}): void
  *  или buyBtnListener с любым колбеком (в колбек будут переданы данные товара).
- *  При нажатии на кнопку "Заказать" будет вызван orderPopup.getElement() или buyBtnListener()
+ *  При нажатии на кнопку "Заказать" будет вызван orderPopup.show() или buyBtnListener()
  *
- *  cartPopup: объет с реализованными методами getElement(): Element и addItem(data: {}): void
+ *  cartPopup: объет с реализованным методом addItem(data: {}): void
  *  или addToCartListener с любым колбеком (в колбек будут переданы данные товара).
- *  При нажатии на кнопку "В корзину" будет вызван cartPopup.getElement() или addToCartListener()
+ *  При нажатии на кнопку "В корзину" будет вызван cartPopup.addItem() или addToCartListener()
  *
  * Пример с колбеками:
  */

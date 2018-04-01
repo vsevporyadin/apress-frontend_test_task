@@ -3,7 +3,7 @@
 (function () {
   window.Listing = Listing
 
-  /**
+   /**
    * Product list class
    * 
    * Public methods:
@@ -14,8 +14,8 @@
    *
    * @constructor
    * @param {Array<{id: nimber, title: string, price: number, img: string}>} opt.data
-   * @param {CartPopup} opt.cartPopup (implement addItem({}): void, getElement(): Element)
-   * @param {OrderPopup} opt.orderPopup (implement show({}): void, getElement(): Element)
+   * @param {CartPopup} opt.cartPopup (implement addItem({}): void)
+   * @param {OrderPopup} opt.orderPopup (implement show({}): void)
    * @param {Function} opt.buyBtnListener function (itemData: {id: nimber, title: string, price: number, img: string})
    * @param {Function} opt.addToCartListener function (itemData: {id: nimber, title: string, price: number, img: string})
    */
@@ -45,9 +45,6 @@
     let _element = document.createElement('div')
     _element.className = 'listing'
     
-    if (_cartPopup) document.body.appendChild(_cartPopup.getElement())
-    if (_orderPopup) document.body.appendChild(_orderPopup.getElement())
-
     _element.addEventListener('click', function (e) {
       addToCartListener(e)
       orderButnListener(e)
