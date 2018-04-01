@@ -1,0 +1,11 @@
+/* Commons */
+
+body {
+  font: normal 14px Arial,sans-serif;
+  font-weight: bold;
+}
+
+.wrapper {
+  margin: 0 auto;
+  width: 700px;
+}
