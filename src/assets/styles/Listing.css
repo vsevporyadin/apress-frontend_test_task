@@ -1,0 +1,69 @@
+/* Listing */
+
+.listing__list {
+  list-style: none;
+}
+
+.listing__item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin: 20px 0;
+}
+
+/* Listing image */
+
+.listing__img {
+  width: 220px;
+  height: 150px;
+  display: flex;
+  align-items: center;
+}
+
+.listing__img img {
+  width: 100%;
+}
+
+/* Listing discription */
+
+.listing__discript {
+  width: 50%;
+  height: 150px;
+}
+
+.listing__title {
+  margin: 20px 0 7px 20px;
+}
+
+.listing__price {
+  font-size: 120%;
+  margin: 0 0 0 20px;
+}
+
+/* Listing control */
+
+.listing__controls {
+  width: 120px;
+  height: 55px;
+  text-align: center;
+}
+
+.listing__buy-btn, .listing__add-btn {
+  font-size: 85%;
+  width: 110px;
+  height: 26px;
+  border: 0;
+  cursor: pointer;
+}
+
+.listing__buy-btn {
+  margin-top: -18px;
+  background: #CC2157;
+  color: white;
+}
+
+.listing__add-btn {
+  margin-top: 18px;
+  background: #EAEAEA;
+  color: #5F5F5F;
+}

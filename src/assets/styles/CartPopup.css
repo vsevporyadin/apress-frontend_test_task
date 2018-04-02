@@ -1,0 +1,128 @@
+/* Cart popup */
+
+.cart-popup {
+  visibility: hidden;
+  opacity: 0;
+  background: rgb(252, 252, 252);
+  position: fixed;
+  top: 5px;
+  width: 340px;
+  right: 50px;
+
+  display: flex;
+  flex-direction: column;
+
+  padding-bottom: 15px;
+  transition: visibility 0.25s, opacity 0.25s;
+  border-bottom: 4px solid #b4b4b4;
+}
+
+.cart-popup_active {
+  visibility: visible;
+  opacity: 1;
+  transition-delay: 0s;
+}
+
+.cart-popup__wrapper {
+  overflow: hidden;
+}
+
+.cart-popup__header {
+  height: 40px;
+  background: #919191;
+  color: white;
+  padding: 23px 0 0 23px;
+  margin: 0;
+}
+
+.cart-popup__arrow {
+  width: 15px;
+  height: 15px;
+  position: absolute;
+  right: 90px;
+  top: -2px;
+  background: #919191;
+  transform: rotate(45deg)
+}
+
+/* Cart popup list */
+
+.cart-popup__list {
+  max-height: 500px;
+  overflow: scroll;
+  overflow-x:hidden;
+  list-style: none;
+  padding: 0;
+  padding-right: 20px;
+  margin-right: -30px;
+}
+
+.cart-popup__item {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 20px;
+  transition: background 0.4s;
+  height: 100px;
+}
+
+.cart-popup__item_active {
+  background: #e6e6e6;
+}
+
+.cart-popup__empty-item {
+  display: none;
+  font-weight: normal;
+  font-size: 90%;
+  margin: 15px 0 15px 30px;
+  color: #686868;
+}
+
+.cart-popup__empty-item_active {
+  display: block;
+}
+
+.cart-popup__img {
+  margin-left: 15px;
+  width: 120px;
+  display: flex;
+  align-items: center;
+}
+
+.cart-popup__img img {
+  width: 100%;
+}
+
+.cart-popup__content {
+  margin: 0 10px 0 15px;
+  width: 160px;
+}
+
+.cart-popup__title {
+  font-size: 80%;
+}
+
+.cart-popup__price {
+  color: dimgray;
+  font-size: 110%;
+  font-weight: normal;
+}
+
+/* Cart popup controls */
+
+.cart-popup__close-btn {
+  margin-right: 15px;
+  margin-top: 15px;
+  height: 20px;
+  color: #CC2157;
+  cursor: pointer;
+}
+
+.cart-popup__to-cart-btn {
+  background: #CC2157;
+  color: white;
+  border: 0;
+  height: 45px;
+  width: 170px;
+  margin-left: 15px;
+  cursor: pointer;
+}
