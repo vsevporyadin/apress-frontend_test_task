@@ -1,0 +1,377 @@
+/* обнуляем стили*/
+html, body, div, span, h1, h2, h3, h4, h5, h6, p, em, img, strong, sub, sup, b, u, i, dl, dt, dd, ol, ul, li, fieldset, form, label, table, tbody, tfoot, thead, tr, th, td, article, aside, canvas, details, figcaption, figure, footer, header, hgroup, menu, nav, section, summary, time, mark, audio, video {
+    margin: 0;
+    padding: 0;
+    border: 0;
+    outline: 0;
+    vertical-align: baseline;
+    background: transparent;
+    font-size: 100%;
+}
+
+a {
+    margin: 0;
+    padding: 0;
+    font-size: 100%;
+    vertical-align: baseline;
+    background: transparent;
+    outline: none;
+}
+
+table {
+    border-collapse: collapse;
+    border-spacing: 0;
+}
+
+td, td img {
+    vertical-align: top;
+}
+
+input, select, button, textarea {
+    margin: 0;
+    font-size: 100%;
+    outline: none;
+}
+
+input[type="text"], input[type="password"], textarea {
+    padding: 0;
+}
+
+input[type="checkbox"] {
+    vertical-align: bottom;
+}
+
+input[type="radio"] {
+    vertical-align: text-bottom;
+}
+
+sub {
+    vertical-align: sub;
+    font-size: smaller;
+}
+
+sup {
+    vertical-align: super;
+    font-size: smaller;
+}
+
+article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, section {
+    display: block;
+}
+
+nav ul {
+    list-style: none;
+}
+
+html {
+    min-height: 100%;
+}
+
+body {
+    font-family: 'Roboto', sans-serif;
+    color: #000;
+    text-align: left;
+    font-size: 1em;
+    min-height: 100%;
+}
+
+a, a:visited {
+    color: #000;
+    text-decoration: underline;
+}
+
+a:hover {
+    color: #000;
+    text-decoration: none;
+}
+
+a:focus, a:active {
+    color: #000;
+    text-decoration: underline;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    font-weight: normal;
+}
+
+img {
+    max-width: 100%;
+}
+
+/* конец обнуления */
+
+.gallery__wrapper {
+    width: 800px;
+    margin: 0 auto;
+}
+
+.gallery-item {
+    display: flex;
+    margin-bottom: 20px;
+}
+
+/* Стили контейнера изображения */
+.img-container {
+    width: 200px;
+    height: 200px;
+    display: table;
+    table-layout: fixed;
+}
+
+.img-wrapper {
+    display: table-cell;
+    vertical-align: middle;
+}
+
+.img-container img {
+    max-height: 100%;
+    max-width: 100%;
+    display: block;
+    margin: 0 auto;
+}
+
+/* Конец стилей контейнера изображения */
+
+/* Стили кнопки закрытия */
+.button-close {
+    position: absolute;
+    right: 15px;
+    top: 15px;
+    width: 10px;
+    height: 10px;
+    opacity: 0.3;
+}
+
+.button-close:hover {
+    opacity: 1;
+}
+
+.button-close:before, .button-close:after {
+    position: absolute;
+    left: 5px;
+    content: ' ';
+    height: 10px;
+    width: 2px;
+    background-color: #333;
+}
+
+.button-close:before {
+    transform: rotate(45deg);
+}
+
+.button-close:after {
+    transform: rotate(-45deg);
+}
+
+/* Конец стилей кнопки закрытия */
+
+/* Стили галереи*/
+.gallery-item__img-container {
+    margin-right: 15px;
+}
+
+.gallery-item__props {
+    width: 410px;
+    padding-top: 10px;
+    margin-right: 15px;
+}
+
+.gallery-item__price {
+    margin-top: 20px;
+    font-weight: bold;
+    font-size: 18px;
+}
+
+.gallery-item__buttons {
+    width: 150px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-top: 40px;
+}
+
+.gallery-item__button {
+    width: 120px;
+    height: 30px;
+    border: none;
+    margin-top: 20px;
+}
+
+.gallery-item__button-order {
+    background-color: #cc2157;
+    color: white;
+}
+
+.gallery-item__button-cart {
+    background-color: #eaeaea;
+    color: black;
+}
+
+/* Конец стилей галереи*/
+
+/* Стили попапа заказа*/
+.order-popup {
+    width: 100%;
+    min-height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    overflow: hidden;
+    position: fixed;
+    top: 0;
+}
+
+.order-popup__content {
+    position: absolute;
+    width: 800px;
+    margin: 0;
+    top: 50%;
+    left: 50%;
+    margin-right: -50%;
+    transform: translate(-50%, -50%);
+
+    background-color: white;
+}
+
+.order-popup__form {
+    position: relative;
+    padding: 15px;
+}
+
+.order-popup__title {
+    font-size: 18px;
+    font-weight: bold;
+    margin-bottom: 15px;
+}
+
+.order-popup .row {
+    display: flex;
+    margin-bottom: 20px;
+}
+
+.order-popup .col:first-child {
+    margin-right: 40px;
+}
+
+.order-popup .col:last-child {
+    display: flex;
+    border-left: 5px solid #cc2157;
+    padding-left: 10px;
+}
+
+.order-popup__price {
+    line-height: 50px;
+    color: #cc2157;
+    font-size: 24px;
+}
+
+.order-popup__comment-label {
+    display: block;
+    width: 120px;
+    text-align: right;
+    font-weight: bold;
+    margin-right: 20px;
+}
+
+.order-popup__comment {
+    width: 350px;
+    height: 150px;
+    background-color: #eeeeef;
+    border: none;
+    resize: none;
+}
+
+.order-popup__phone-label {
+    margin-left: 100px;
+    margin-right: 17px;
+    font-weight: bold;
+}
+
+.order-popup__phone {
+    border: none;
+    background-color: #eeeeef;
+    height: 24px;
+    width: 150px;
+}
+
+.order-popup__button-submit {
+    display: block;
+    margin-top: 40px;
+    margin-left: 240px;
+    width: 120px;
+    height: 30px;
+    border: none;
+    background-color: #cc2157;
+    color: white;
+}
+
+/* Конец стилей попапа заказа*/
+
+/* Стили попапа корзины*/
+.cart-popup {
+    position: fixed;
+    top: 10px;
+    right: 100px;
+    background-color: #f7f7f7;
+    width: 300px;
+}
+
+.cart-popup__label {
+    color: white;
+    background-color: #919191;
+    padding: 20px;
+}
+
+.card-popup__img-container {
+    width: 125px;
+    height: 125px;
+}
+
+.cart-popup .row {
+    padding: 10px;
+    padding-right: 20px;
+    display: flex;
+    position: relative;
+}
+
+.cart-popup .col:first-child {
+    margin-right: 10px;
+}
+
+.cart-popup__button-close {
+    right: 10px;
+}
+
+.cart-popup__button-close:before, .cart-popup__button-close:after {
+    background-color: #cc2157;
+}
+
+.cart-popup__title {
+    max-height: 55px;
+    overflow: hidden;
+    margin-bottom: 10px;
+}
+
+.cart-popup__price {
+    color: #59595a;
+}
+
+.cart-popup__button-cart {
+    display: block;
+    margin: 10px;
+    width: 180px;
+    height: 50px;
+    border: none;
+    background-color: #cc2157;
+    color: white;
+    text-decoration: none;
+    text-align: center;
+    line-height: 50px;
+}
+
+.cart-popup__button-cart:visited {
+    color: white;
+}
+
+.cart-popup__button-cart:hover {
+    color: white;
+}
+/* Конеце стилей попапа корзины*/
