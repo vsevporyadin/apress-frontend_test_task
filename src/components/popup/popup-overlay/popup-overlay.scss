@@ -1,0 +1,12 @@
+@import '../../variables';
+
+.overlay {
+  position: fixed;
+  display: flex;
+  width: 100%;
+  height: 100%;
+  padding: 20px;
+  background-color: rgba($grayText, .5);
+  box-sizing: border-box;
+  z-index: 100;
+}

@@ -1,0 +1,33 @@
+@import '../variables';
+
+.wrap {
+  display: flex;
+  justify-content: space-between;
+  font-family: sans-serif;
+  .image-wrap {
+    margin-right: 40px;
+    width: 400px;
+    min-width: 200px;
+    flex-shrink: 1;
+  }
+  .image {
+    display: block;
+    width: 100%;
+    height: auto;
+  }
+  .header {
+    width: 700px;
+    color: $grayText;
+    flex-grow: 1;
+    margin-right: 40px;
+    font-weight: 600;
+    .title {
+      margin: 0 0 20px 0;
+      font-size: 20px;
+      font-weight: normal;
+    }
+    .price {
+      font-size: 26px;
+    }
+  }
+}
