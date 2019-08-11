@@ -19,7 +19,6 @@ class PopupOverlay extends Component {
 
   render() {
     const { popupType, ...restProps } = this.props;
-    console.log(restProps)
     return (
       <div className={styles.overlay} onClick={this.hidePopup} ref={this.overlayRef}>
         {popupType === 'order'
