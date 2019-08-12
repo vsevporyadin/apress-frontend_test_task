@@ -13,7 +13,7 @@ const returnOrdinaryClasses = (color, className) => (
 );
 
 const Button = ({ onClick, color, children, isClosing, className }) => {
-  const clr = colors.includes(color) && color;
+  const clr = colors.indexOf(color) > -1 && color;
   const buttonClasses = isClosing ? returnCloseClasses(clr, className) : returnOrdinaryClasses(clr, className);
   return (
     <button className={buttonClasses} type='button' onClick={onClick}>

@@ -14,7 +14,7 @@ const formatPrice = number => {
 };
 
 const Price = ({ price, currency = 'руб.', className, color }) => {
-  const colorClass = colors.includes(color) ? color : colors[0];
+  const colorClass = colors.indexOf(color) > -1 ? color : colors[0];
   return (
     <p className={classNames(styles.price, className, styles[colorClass])}>{formatPrice(price)}&nbsp;{currency}</p>
   );
