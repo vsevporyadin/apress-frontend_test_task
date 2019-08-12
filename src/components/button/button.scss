@@ -56,13 +56,30 @@
     height: 2px;
     content: '';
     transform: rotate(45deg);
-    background-color: lighten($grayText, 30%);
   }
   &::after {
     transform: rotate(-45deg);
   }
+}
+
+.close-gray {
+  &::before,
+  &::after {
+    background-color: lighten($grayText, 30%);
+  }
   &:hover::before,
   &:hover::after {
     background-color: lighten($grayText, 10%);
+  }
+}
+
+.close-pink {
+  &::before,
+  &::after {
+    background-color: $pink;
+  }
+  &:hover::before,
+  &:hover::after {
+    background-color: lighten($pink, 10%);
   }
 }

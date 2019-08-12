@@ -1,6 +1,7 @@
 const path = require("path");
 const MiniCSSExtractPlugin = require("mini-css-extract-plugin");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
+const CopyPlugin = require('copy-webpack-plugin');
 
 module.exports = {
   entry: "./src/index.js",
@@ -20,17 +21,11 @@ module.exports = {
         use: ["babel-loader"],
       },
       {
-        test: /\.jpg$/i,
-        use: [
-          {
-            loader: 'file-loader',
-            options: {
-              name: '[name].[ext]',
-              outputPath: path.resolve(__dirname, '/build'),
-              publicPath: path.resolve(__dirname, '/build'),
-            }
-          },
-        ],
+        test: /\.(png|jpg|gif)$/i,
+        loader: 'file-loader',
+        options: {
+          outputPath: path.join(__dirname, "/build/assets"),
+        },
       },
       {
         test: /\.(css|scss)$/,
@@ -58,6 +53,9 @@ module.exports = {
     }),
     new MiniCSSExtractPlugin({
       filename: "[name].css",
-    })
+    }),
+    new CopyPlugin([
+      { from: "./src/assets/images", to: "./assets/images" },
+    ])
   ],
 };
