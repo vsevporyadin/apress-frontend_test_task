@@ -1,0 +1,16 @@
+@import "../variables";
+
+.price {
+  font: inherit;
+  margin: 0;
+}
+
+.pink {
+  font-size: 26px;
+  color: $pink;
+}
+
+.gray {
+  font-size: 18px;
+  color: $lightGray;
+}

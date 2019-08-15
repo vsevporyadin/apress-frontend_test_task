@@ -1,0 +1,21 @@
+@import '../variables';
+
+.base {
+  display: block;
+  font: inherit;
+  color: inherit;
+  cursor: pointer;
+  text-decoration: none;
+  &:link,
+  &:visited {
+    font: inherit;
+    color: inherit;
+  }
+  &:hover,
+  &:focus {
+    color: darken($grayText, 20%);
+  }
+  &:active {
+    color: lighten($grayText, 20%);
+  }
+}
